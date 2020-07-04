@@ -1,0 +1,1655 @@
+---
+title: "R Fundamentals"
+Student: Channing Powers
+output:
+  html_document:
+    df_print: paged
+Instructor: Bogdan Anastasiei
+---
+
+#################################
+# CREATING VECTORS WITH THE c() FUNCTION
+#################################
+
+### a vector is a sequence of elements of the same type:
+### numeric, character (string) or logical
+### NUMERICAL | CHARACTER | LOGICAL
+
+
+### one of the most common ways to create vectors
+### is using the c() function
+### c stands for concatenate
+### c() concatenates the values to create a vector.
+### The values are the arguments of the function.
+### Values in a vector can be Numeric,Categorical, or both.
+
+### Numeric
+```{r}
+x <- c(10, 20, 30, 40, 50)
+x
+is.vector(x) #---> TRUE
+```
+```{r}
+y <- c("Tom", "Dick", "Janey")
+y
+is.vector(y) #---> TRUE
+```
+
+```{r}
+z <- c(1,2,3, "Tom", "Dick", "Janey")
+is.vector(z) #---> TRUE
+typeof(z) #----> character (Stored in memory as __ ATOMIC DATATYPE)
+```
+
+### The elements of a vector are called COMPONENTS.
+### CLASS refers to the "Abstract type of the OBJECT in R".
+### TYPE refers to "How the object is STORED in MEMORY by R.
+### To get the class and type of x, use the following FUNCTIONS.
+
+```{r}
+class(x)
+typeof(x) #------> Double- double precision floating point format.
+```
+
+### Character Vector
+
+```{r}
+y <- c("a", "b", "c")
+y
+
+class(y)
+typeof(y)
+```
+
+
+### Logical Vector
+```{r}
+z <- c(TRUE, FALSE, FALSE, TRUE)
+N <- c(FALSE, FALSE, TRUE, FALSE)
+z
+class(z)
+typeof(z)
+str(z)
+```
+
+### Vector of components of different types
+
+```{r}
+n <- c(1, 2, "a", "b", TRUE, FALSE)
+n
+class(n)
+typeof(n)
+str(n)
+```
+
+### Vector length (number of COMPONENTS)
+```{r}
+x <- c(10, 20, 30, 40, 50)
+x
+length(x)
+
+y <- c("a", "b", "c")
+y
+length(y)
+### we can add values to an existing vector
+x <- c(x, 100:105)
+y <- c(y,"d","e", "f", "g")
+x
+y
+```
+
+### If you nest two or more Vectors together,
+### the result is ONE Vector ONLY.
+
+```{r}
+w <- c(c(1, 2, 3), 25)
+w
+str(w)
+is.vector(w == 1)
+
+k <- c(c(10,20,30), 25)
+k
+str(k)
+is.vector(k == 1)
+
+s <- c(c(2, 4, 6), c(10, 12, 14))
+str(s)
+is.vector(s == 1)
+```
+
+###################################################
+
+########################################
+# CREATING VECTORS WITH THE COLON OPERATOR (:)
+########################################
+
+### The COLON operator CREATES a sequence of INTEGERS
+```{r}
+x <- 1:5
+x
+typeof(x) #----> integer
+```
+
+### Get the CLASS(abstract type of object) and TYPE(stored in memory by R as_)
+```{r}
+class(x)#-----> class of object is integer
+typeof(x)#----> type of vector is integer
+```
+
+### Create another vector with the same values, using the c() function
+### Are Vectors with the SAME values, always Exactly IDENTICAL?
+```{r}
+x <- 1:5
+y <- c(1, 2, 3, 4, 5)
+x
+y
+
+x == y #---> TRUE TRUE TRUE TRUE TRUE
+str(x) == str(y) #----> int[1:5] 1 2 3 4 5
+                #----> num[1:5] 1 2 3 4 5
+               #----> logical(0) 
+              #----> NO
+```
+```{r}
+class(y)#-----> class of object is NUMERIC
+typeof(y)#----> type of VectorS are DOUBLE
+```
+
+```{r}
+### Create SEQUENCES in Descending order
+z <- 10:1
+z
+zyxwvut <- 26:20
+zyxwvut 
+```
+
+```{r}
+# Use the COLON Operator with VARIABLES
+i <- 5
+j <- 25
+
+# Build a SEQUENCE from i to j
+k <- (i:j)
+k #-------> 5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+typeof(k)#-----> Atomic Data type is INTEGER
+
+# BUILD A SEQUENCE from i to j By STEPS of 5
+L <- c(i:j,steps=5)
+L #----> 5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+### You can COMBINE the COLON Operator with the c() function
+w <- c(3:9, 70, 49)
+w
+typeof(w)#----> Atomic data type is DOUBLE 
+#-------------------------------------------------------------#
+z <- c(1:10, 20:-5)
+z
+typeof(z)#----> The type is INTEGER.
+        #----> Because the Vector contains ONLY int numbers.
+Z_<- c(1:10, 20:-5,70)
+typeof(Z_)#-----> Atomic data type is DOUBLE
+```
+###################################################
+
+###################################
+# CREATING VECTORS WITH THE rep() FUNCTION
+###################################
+
+### With rep() we CREATE Vectors with REPLICATED Values.
+
+### You must specify the value and the number of times to replicate it.
+
+# Replicate a vector of length one x(times).
+```{r}
+x <- rep(5, 3)
+x
+```
+### we can do the same for strings and logical values
+
+```{r}
+y <- rep("Moms are cool", 6)
+y
+```
+### You can combine rep() with c(),
+### to replicate an entire vector (sequence of components)
+### How many times will you replicate your Vector?
+
+```{r}
+z <- rep(c(1, 2, 3), 5)
+z
+```
+### To replicate the vector element-by-element,
+### we use the each argument.
+```{r}
+w <- rep(c(1, 2, 3), each = 5)
+w
+```
+
+### You can combine rep() with the COLON Operator
+```{r}
+q <- rep(2:5, 3)
+q
+```
+### To repeat the sequence element-by-element,
+### use the each argument.
+```{r}
+s <- rep(2:5, each = 3)
+s
+```
+
+### Other functions that REPLICATE values.
+### The function numeric().
+### It will RETURN a Vector of ZEROES.
+```{r}
+t <- numeric(14)
+t
+?numeric()
+```
+### The function character(), 
+### will return a Vector of EMPTY Strings.
+
+```{r}
+k <- character(4)
+k    #----> What application does a vector of empty strings have?
+```
+
+### The function logical() 
+### will RETURN a Vector of FALSE Values.
+
+```{r}
+u <- logical(4)
+u   #----> Application ?
+```
+########################################################
+
+
+######################################
+# CREATING VECTORS WITH THE seq() FUNCTION
+######################################
+
+### The seq() function creates sequences of REAL Numbers
+
+### For this function you have to specify:
+### The START value,the END value and the STEP (distance between components)
+### the default step value is 1
+
+```{r}
+x <- seq(from=1, to=10, by=0.5)
+
+x
+```
+
+### If we enter the arguments in this exact order (start, stop, step)
+### we don't have to write the names
+
+```{r}
+y <- seq(1, 10, 0.5)
+
+y
+```
+
+### other example
+
+```{r}
+z <- seq(0, 20, 2)
+z
+```
+
+### one more example
+
+```{r}
+w <- seq(1, 10, 2)
+w
+```
+
+### The sequence stops at 9, because the difference between 10 and 1
+### is NOT a MULTIPLE of 2
+
+### You can Create sequences in REVERSED order
+### using a NEGATIVE step
+
+# Countdown
+```{r}
+t <- seq(11, 1, -2)
+t
+```
+
+### Instead of specifying the step, 
+### you can specify the number of components
+### in the sequence (the program will compute the step).
+### To indicate the number of components USE the length argument
+
+### create a sequence of 10 numbers between 1 and 5
+
+```{r}
+q <- seq(1, 5, length=10)
+
+q
+```
+# the step is computed by dividing the difference 
+# between the stop and start values
+# to the number of components minus one
+
+# in this case, the step is (5-1)/9 = 0.4444
+
+### create a sequence of 100 numbers from -3 to 25
+
+```{r}
+#seq(_,_, length=_)
+x <- seq(-3, 25, length = 100) #---> the step is (25+3)/99 = 0.282828
+
+x
+```
+
+### You can combine the seq() function with c() and rep()
+```{r}
+y <- c(seq(1, 10, length=5), 30, 40)
+
+y
+```
+
+### create a seq of vectors from 1 to 3, by 0.5, replicated three times.
+```{r}
+z <- rep(seq(1, 3, 0.5), 3)
+z
+```
+#create a seq of vectors from 1to3 by 0.5, repeat each vector three times
+```{r}
+w <- rep(seq(1, 3, 0.5), each = 3)
+w
+```
+###############################################################
+
+##################################
+# CREATING VECTORS OF RANDOM NUMBERS 
+##################################
+
+### Vectors of RANDOM NUMBERS are USEFUL in SIMULATIONS
+### and other statistical applications
+
+### Create a vector of discrete random numbers
+### with the sample() function
+
+### you must indicate the POPULATION
+### and the number of values to be EXTRACTED (sample)
+
+### Extract 12 random numbers from 1 to 100
+### nCx (OUT OF 100, Choose 12 random numbers)
+
+```{r}
+n <- sample(100, 12)
+n
+```
+
+# THE POPULATION CAN BE ANY VECTOR
+```{r}
+N<- sample(100:300,10)
+N
+```
+
+### the population can be any vector
+```{r}
+h <- 100:300
+
+H <- sample(h, 10)
+
+H
+```
+### In these examples, the selection was made WITHOUT Replacement.
+### So we got vectors of UNIQUE values.
+### The replace option in the sample function() is set to FALSE by default.
+
+### If we set it to TRUE, the selection will be made WITH Replacement
+
+```{r}
+p <- sample(30, 15, replace = TRUE)
+p
+```
+
+### If the sample is greater than the population
+### the Replace option MUST be SET to TRUE
+
+### Generate/Extract 50 random numbers from 1 to 10
+
+```{r}
+m <- sample(10, 50, replace = TRUE)  
+m
+```
+
+### If we don't allow the replacement, we get an error message
+```{r}
+M <- sample(10, 50, replace = FALSE)
+M
+```
+# Generating Vectors of continuous random numbers
+## using a few common statistical distributions
+
+### To generate a vector of random numbers with a normal distribution
+### we use the rnorm() function
+
+### You must specify the number of values (TRIALS), mean and standard deviation.
+### By default, mean is equal to 0 and standard deviation to 1.
+
+```{r}
+x <- rnorm(100, 10, 5)
+
+x
+```
+
+# Generate 100 random numbers 
+# with a Standardized Normal Distribution
+# mean = 0, std = 1 
+```{r}
+x <- rnorm(100)
+x
+```
+### to generate a vector of uniform random numbers
+### we use the runif() function
+
+# we must specify the number of trials and the range (lower and upper limit)
+# The default range is 0-1
+# lower limit = 0 and Upper limit = 1
+
+# create a vector that contains 100 randon numbers 
+# with a uniform distribution bewtween 1 and 5
+
+```{r}
+y <- runif(100, 1, 5)
+
+y
+```
+### To generate a vector of EXPONENTIAL random numbers,
+### Use the rexp() function.
+
+### You must specify the number of trials,
+### and the rate (1/mean).
+
+# Generate a vector of exponential random numbers
+# using the rexp () function
+# the rate is 1/50
+```{r}
+z <- rexp(100, 1/50)
+
+z
+```
+##################################################3
+
+#####################
+# CREATING EMPTY VECTORS 
+#####################
+
+### In some cases you need to INITIALIZE a vector before using it,
+### by creating an empty vector.
+
+### There are several ways to do this.
+
+### Using an empty c() function
+
+```{r}
+x <- c()
+x
+typeof(x) #----> R stores it in memory as NULL
+length(x) #----> 0
+```
+
+# Another way to create an empty vector 
+# is to assign a NULL value to a variable
+# using the NULL value
+
+```{r}
+y <- NULL
+y
+typeof(y) #----> NULL
+is.vector(y) #----> FALSE
+```
+# A Third way to create an EMPTY VECTOR
+# is using an empty vector() function
+
+```{r}
+z <- vector() #----> will return a logical empty vector
+z
+typeof(z) #---> stored in R memory as a "logical" vector
+is.vector(z) #---> TRUE
+is.logical(z) #---> TRUE
+```
+
+# TO ADD VALUES TO THE EMPTY VECTORS
+# Simply concatenate the new values inside the empty vector
+```{r}
+x #--> NULL
+x <- c(x, 1, 2)
+
+x
+typeof(x) #---> "double"
+
+y #----> NULL
+y <- c(y, 1, 2)
+
+y
+typeof(y) #---> "double"
+
+z #----> logical(0)
+z <- c(z, 1, 2)
+
+z
+typeof(z) #---> "double"
+```
+#####################################################
+
+####################################
+# INDEXING VECTORS USING NUMERIC INDICES 
+####################################
+
+### indexing a vector means accessing the vector components
+
+### and the indices (subscripts) must be put between square brackets
+
+```{r}
+x <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+length(x)
+### ACCESS one component (INDEXING)
+x[2] #----> the 2nd component is (20)
+```
+
+### INDEX several components
+# use COMBINE function c()
+# we put them in a container
+```{r}
+x[c(1,3,8)] #----> 10 30 80
+```
+### INDEX components in order
+```{r}
+x[2:5] #----> 20 30 40 50
+
+x[5:2] #----> 50 40 30 20
+
+### combine the methods above
+
+x[c(1:4, 7)] #---> 10 20 30 40 70
+```
+
+### ACCESS the last component (when we don't know the length)
+
+```{r}
+x[length(x)]
+```
+### we can put the indices in a separate vector
+```{r}
+n <- 3:5
+x[n] #---> 30 40 50
+
+```
+### The NEGATIVE indices help us REMOVE a component
+
+### remove one component
+```{r}
+x[-2]
+```
+
+### remove several components
+### put the compnents you want to remove in a container
+```{r}
+x[c(-1, -3, -6)]
+
+### remove components in order
+
+x[-2:-4]
+
+x[-4:-2]  # the order is not important here
+
+### combine the methods above
+
+# remove the first 5 components, and the 9th component
+x[c(-1:-5, -9)]
+
+# REMOVE THE LAST COMPONENT OF a VECTOR
+# (when we don't know the length)
+# Eliminate the last value in a vector 
+x[-length(x)]
+
+```
+
+### You CANNOT mix negative and positive indices
+
+```{r}
+x[c(3, -7)] #-->ERROR: only zeros can be combined w/ negative indices
+
+```
+# To eliminate the 7th component in a Vector
+# you can use this SYNTAX
+```{r}
+x[c(0, -7)]
+
+```
+### OR you can use this SYNTAX
+### which has the same effect
+
+```{r}
+x[-7]
+```
+
+### You can add components to an existing vector
+### (or edit components) using indices
+
+```{r}
+x <- c(7, 8, 9, 10)
+
+x[5] <- 11
+
+x
+
+x[2] <- 100
+x
+```
+### You cannot do this operation
+# if the vector was not pre-defined
+```{r}
+p[1] <- 3 #----> Error in p[1] <- 3 : object 'p' not found
+```
+### You must define the vector first
+# Create an EMPTY VECTOR 
+# That we can add numbers to.
+```{r}
+p <- c() #---> NOW THE VECTOR P, DOES EXIST.
+```
+### then you can add components as you want
+
+```{r}
+p[1] <- 3
+
+p[2] <- 7
+
+p
+```
+### TO INSERT A COMPONENT into an existing vector
+### you must "BREAK" the vector
+
+```{r}
+x <- c(9, 100, 11, 12)
+x
+```
+
+### we want to insert 50 between 11 and 12
+
+```{r}
+# x <- c(9, 100, 11, 12)
+
+x <- c(x[1:3], 50, x[4])
+
+x
+```
+#####################################################3
+
+####################################
+# INDEXING VECTORS USING LOGICAL INDICES 
+####################################
+
+```{r}
+x <- c(1, 2, 3, 4)
+```
+# We need to access the second and the third components
+# Using logical indices
+
+# Create a logical vector of the same length
+```{r}
+i <- c(FALSE, TRUE, TRUE, FALSE)
+
+### Index the x vector
+
+x[i] #---> 2 3 (TRUE TRUE)
+
+### we can do this directly as well
+
+x[c(FALSE, TRUE, TRUE, FALSE)]
+```
+###################################################
+
+#######################
+# NAMING VECTORS COMPONENTS 
+#######################
+
+### In some cases we might need to ASSIGN a NAME 
+### To a/EACH component of a vector
+
+### The vector below contains the SALARIES of THREE Employees
+### Tom, Dick and Janey (in this order)
+
+```{r}
+salary <- c(4000, 2700, 3200)
+```
+
+### to add the employees names
+# WE USE the names() function
+
+```{r}
+names(salary) <- c("Tom", "Dick", "Janey")
+salary
+```
+
+### If a vector has names, 
+### we can INDEX the components using the names
+
+```{r}
+salary["Tom"]
+salary["Dick"]
+salary["Janey"]
+```
+### to remove names we assign the NULL value to the names() function
+
+```{r}
+names(salary) <- NULL
+salary
+```
+
+###########################################
+
+#################
+# FILTERING VECTORS 
+#################
+
+### VECTOR Filtering (or slicing) 
+### is the operation of 
+### selecting the components
+### that meet one or more conditions
+
+### the filtering conditions must be put between square brackets
+
+```{r}
+x <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+```
+
+### FILTER the components that are GREATER than 45
+```{r}
+y <- x[x>45]
+y
+```
+### FILTER the components that are smaller than 72
+
+```{r}
+y <- x[x<72]
+y
+```
+### FILTER the components that are equal to 30
+
+```{r}
+y <- x[x==30]
+y
+```
+### FILTER the components that are different from 30
+
+```{r}
+y <- x[x!=30]
+y #---> 10 20 40 50 60 70 80 90 100
+```
+### select the components that are greater than 27
+### AND lower than 83
+
+```{r}
+y <- x[x>27&x<83]
+y #---> 30 40 50 60 70 80
+```
+
+### select the components that are lower than 35
+### OR greater than 71
+
+# THE VALUE MUST MEET EITHER CONDITON
+```{r}
+y <- x[x<35|x>71]
+y #----> 10  20  30  80  90 100
+```
+### select the components that are lower than 60
+### OR greater than 20
+
+```{r}
+y <- x[x<60|x>20]
+y #---> ALL THE NUMBERS IN THE ARE CHOSEN
+```
+
+### select the components that are greater than 20
+### AND different from 80
+
+```{r}
+y <- x[x>20&x!=80]
+y
+```
+### select the components that are greater than 20
+### OR different from 80
+
+```{r}
+y <- x[x>20|x!=80]
+y
+```
+### To find out the INDICES of the components 
+### that meet a condition
+### USE THE  which() FUNCTION
+
+### which components are EQUAL TO 40?
+
+```{r}
+which(x==40) #-----------> Index number 4
+
+```
+### which components are LESS THAN 54?
+```{r}
+which(x<54) #-----? Index number 1 2 3 4 5
+```
+
+# which components are GREATER THAN 43?
+```{r}
+which(x>43) #-----------------> 5 6 7 8 9 10
+```
+
+### of course, we can store these indices in a vector to use them later
+```{r}
+i <- which(x>43)
+i
+```
+
+### to check whether a value can be found in a vector
+### we can use the binary operator %in%
+
+### it returns TRUE if the value is present
+
+# CAN 40 BE FOUND IN THIS VECTOR?
+```{r}
+40 %in% x #-----> TRUE
+
+# CAN 86 BE FOUND IN THIS VECTOR?
+86 %in% x #----> FALSE
+```
+#######################################
+
+##############
+# all() AND any() FUNCTIONS
+##############
+
+### all() is a special function that checks whether all
+### the components in a vector meet a certain condition
+
+### the result of this FUNCTION is either TRUE or FALSE
+
+```{r}
+x <- c(1, 3, 5, 7, 9, 11, 13, 15)
+```
+### check whether all the components are greater than zero
+
+```{r}
+all(x>0) #----> TRUE
+```
+### check whether all the components are lower than 50
+```{r}
+all(x<50) #----> TRUE
+```
+
+### check whether all the components are lower than 8
+```{r}
+all(x<8)
+```
+
+### check whether all the components are greater than 10
+
+```{r}
+all(x>10)
+```
+### check whether all the components are greater than 0
+### and lower than 10
+
+```{r}
+all(x>0&x<10) #-----> FALSE
+```
+### check whether all the components are greater than 0
+### and lower than 35
+
+```{r}
+all(x>0&x<35) #----> TRUE
+```
+
+### check whether all the components are greater than 0
+### or lower than 7
+
+```{r}
+all(x>0|x<7) #----> TRUE
+```
+
+### check whether all the components are greater than 4
+### or lower than 7
+
+```{r}
+all(x>4|x<7) #----> TRUE
+```
+
+### check whether all the components are greater than 4
+### or lower than 2
+
+```{r}
+all(x>4|x<2) #----> FALSE
+```
+
+### any() is a function that checks whether any component
+### in a vector meets a certain condition
+
+```{r}
+x
+```
+
+### is there any component (any) greater than 4?
+```{r}
+any(x>4) #----> TRUE
+```
+
+### is there any component lower than than 0?
+```{r}
+any(x<0) #----> FALSE
+```
+
+### is there any component equal to 11?
+```{r}
+any(x==11) #----> TRUE
+```
+
+### is there any component equal to 4?
+```{r}
+any(x==4) #----> TRUE
+```
+
+# LETS TRY WITH TWO LOGICAL CONDITIONS
+### is there any component lower than 10
+### and greater than 3?
+
+```{r}
+any(x<10&x>3) #----> TRUE
+```
+
+### is there any component lower than 4
+### and greater than 9?
+
+```{r}
+any(x<4&x>9) #----> TRUE
+```
+### is there any component lower than 4
+### or greater than 9?
+
+```{r}
+any(x<4|x>9) #----> TRUE
+
+### is there any component lower than 0
+### or greater than 100?
+
+any(x<0|x>100) # FALSE
+```
+
+############################################################
+
+##################################
+# HOW TO GET THE SUM AND PRODUCT OF VECTOR COMPONENTS
+# BASIC STATISTICAL INDICATORS
+# WE CAN ONLY DO THIS WITH NUMERIC VECTORS
+##################################
+
+```{r}
+x <- c(2, 4, 6, 15, 17, 19)
+```
+### to add the components of a numeric vector
+
+```{r}
+sum(x)
+```
+
+### we can store the result in a new vector
+
+```{r}
+y <- sum(x)
+
+y
+```
+### to multiply the components of a numeric vector
+# prod function
+
+```{r}
+prod(x) #---> 232560
+```
+### to compute the cumulative sum
+
+```{r}
+cumsum(x) #----> 2  6 12 27 44 63
+```
+
+### to compute the cumulative product
+
+```{r}
+cumprod(x) #--> 2      8     48    720  12240 232560
+```
+### compute the mean of the components
+# Computing STATISTICAL INDICATORS
+
+```{r}
+mean(x) #----> 10.5
+```
+
+### compute the median of the components
+
+```{r}
+median(x) #----> 10.5
+```
+
+### compute the variance of the components
+
+```{r}
+var(x) #---> 53.9
+```
+
+### compute the standard deviation of the components
+
+```{r}
+sd(x) #---> 7.341662
+```
+
+
+### get the summary statistics for a numeric vector
+# this function provides us with the following information
+```{r}
+summary(x) #-----> Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+           #-----> 2.0     4.5    10.5    10.5    16.5    19.0 
+
+fivenum(x) #----> 2.0  4.0 10.5 17.0 19.0 (Tukey's Summary)
+```
+
+##########################################################
+
+#####################
+# VECTORIZED OPERATIONS
+#####################
+
+### vectorized operations are operations that apply to all the components
+### of a vector simultaneously (in parallel)
+
+### This is very effective feature of R 
+### that saves us from writing a lot of loops
+### (vectorized operations are actually loops)
+### They loop through the vector and 
+### apply the operation to each component
+
+### the result of a vectorized operation is a vector
+
+### here's the main vectorized operations
+
+### adding a vector to a scalar
+
+```{r}
+x <- c(1,2,3,4,5)
+
+y <- x + 10 #---> This line of code takes the components of x, and adds 10 to all of them.
+y #----> 11 12 13 14 15
+```
+
+### multiplying a vector by a scalar
+
+```{r}
+y <- x * 3 #---> multiples each component in our vector x by 3
+y #----> 3  6  9 12 15
+```
+
+### computing the modulo values of the components
+### (the remainders from dividing each component to a scalar)
+
+```{r}
+y <- x %% 2
+
+y #---> 1 0 1 0 1
+```
+
+# Raising the vector components to a POWER
+# Raise the component
+```{r}
+y <- x ^ 2
+
+y #----> 1  4  9 16 25
+```
+### Exponentiate each component of a vector
+
+```{r}
+exp(x) #---> this computes 1^1 2^2 3^3 4^4 5^5
+       #---> 1  4  9 16 25
+```
+
+### EXTRACT the SQUARE root
+```{r}
+sqrt(x) #---> 1.000000 1.414214 1.732051 2.000000 2.236068
+
+x ^ (1/2) #---> 1.000000 1.414214 1.732051 2.000000 2.236068
+```
+
+### Extraction of any ROOT
+
+```{r}
+x ^ (1/3) #---> 1.000000 1.259921 1.442250 1.587401 1.709976
+```
+
+### Compute the NATURAL LOGARITHM
+
+```{r}
+log(x) #---> 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379
+```
+
+### Compute the TRIGONOMETRICAL functions (sin, cos etc.)
+
+```{r}
+sin(x) #---> 0.8414710  0.9092974  0.1411200 -0.7568025 -0.9589243
+
+cos(x) #--->  0.5403023 -0.4161468 -0.9899925 -0.6536436  0.2836622
+
+tan(x) #---> 1.5574077 -2.1850399 -0.1425465  1.1578213 -3.3805150
+```
+
+### Compute the ABSOLUTE VALUE
+
+```{r}
+abs(x) #---> 1 2 3 4 5
+```
+
+### round the vector components
+
+```{r}
+z <- c(1.3, 3.7, 9.5)
+```
+
+# round function
+```{r}
+round(z)  #---> rounded components of the vector z
+          #---> 1  4 10
+```
+
+### round to the closest LOWER interger
+```{r}
+floor(z) #---> 1 3 9
+```
+
+### round to the closest HIGHER interger
+```{r}
+ceiling(z) #----> 2  4 10
+```
+
+### round to a SPECIFIED Number of significant digits
+### using the signif() function
+### you have to specify the vector 
+### and the number of digits
+
+```{r}
+w <- c(3.954, 7.200, 9.028)
+
+signif(w, 1) #---> 4 7 9
+
+signif(w, 2) #----> 4.0 7.2 9.0
+
+signif(w, 3) #---> 3.95 7.20 9.03
+```
+
+### Compute the FACTORIAL of each element
+
+```{r}
+factorial(w) #----> 1   2   6  24 120
+factorial(x) #----> 1   2   6  24 120
+```
+###############################################################
+
+#######################
+# MISSING VALUES IN VECTORS
+#######################
+
+### The missing (unknown) values are represented by the NA symbol
+
+### Here's a vector that stores the salaries of five employees
+```{r}
+sal <- c(3500, 1800, 2400, NA, 2900)
+```
+
+### let's try to compute the average salary
+
+```{r}
+mean(sal)
+```
+
+### we must remove the missing value first
+```{r}
+sal2 <- na.omit(sal)
+sal2 #----> 3500 1800 2400 2900
+```
+
+### Compute the mean
+
+```{r}
+mean(sal2) #---> 2650
+```
+
+### a simpler way to do the same
+# Using the parameter na.rm, in the mean function
+
+```{r}
+mean(sal, na.rm = TRUE) #---> this option removes missing values automatically
+```
+### the missing values count for the vector length
+```{r}
+length(sal) #----> 5
+```
+### to identify the missing values we can use the function is.na()
+
+# is a vector missing in the data, sal?
+```{r}
+y <- is.na(sal)
+
+y #---->  FALSE FALSE FALSE  TRUE FALSE
+```
+#######################################################
+
+###############
+# SORTING A VECTOR
+###############
+
+```{r}
+x <- c(6, 8, 3, 11, 5, 10, 2, 17)
+```
+#Apply sort function to get the numbers from lowest to highest 
+
+```{r}
+sort(x) #----> 2  3  5  6  8 10 11 17
+```
+### THE VECTOR ITSELF DOES NOT CHANGE 
+
+### Check
+```{r}
+x #----> 6  8  3 11  5 10  2 17
+```
+### To get the order of indices we can use the order() function
+### Only the order of INDICES changes 
+### NOT THE VECTOR ITSELF
+
+```{r}
+#                2  3   5   6   8   10  11  17
+order(x) #----> 7th 3rd 5th 1st 2nd 6th 4th 8th
+```
+
+### we can store the sorted values in an new vector
+```{r}
+y <- sort(x)
+y
+```
+### to sort the components in decreasing order
+# set the decreasing option to TRUE
+```{r}
+y <- sort(x, decreasing = TRUE)
+
+y
+```
+
+### we can sort CHARACTER and LOGICAL vectors as well
+```{r}
+w <- c("z", "a", "n", "d")
+
+# Components are sorted in alphabetical order
+# By default the sort function sorts in ascending a-z order
+sort(w)
+
+# Set the sort function option to descending z-a order
+sort(w, decreasing = TRUE)
+```
+
+### Logical Components
+```{r}
+q <- c(TRUE, FALSE, TRUE, FALSE)
+```
+
+# By default the sort function sorts logical values from FALSE to TRUE
+```{r}
+sort(q) #----> FALSE FALSE  TRUE  TRUE
+```
+
+# Set the option decreasing=TRUE to sort in descending order instead
+
+```{r}
+sort(q, decreasing = TRUE) #---> TRUE  TRUE FALSE FALSE
+```
+###################################################
+
+#################
+# MINIMA AND MAXIMA
+#################
+
+### to get the minimum and maximum values in a vector
+### we use the min() and max() functions
+```{r}
+x <- c(4, 1, 7, 5, 12, 6)
+
+min(x)
+
+max(x)
+```
+### to determine the INDICES of the minimum and maximum values
+### we use the which.min() and which.max() functions
+
+#THE INDEX of the MINIMUM VALUE
+```{r}
+which.min(x) #----> 2
+#THE INDEX of the MAXIMUM VALUE
+which.max(x) #----> 5
+```
+
+### the functions pmin() and pmax() allow us to determine
+### the minima and maxima from pairs of vector values
+```{r}
+y <- c(2, 9, 7, 6, 10, 14)
+y #-----> 2  9  7  6  10  14
+x #-----> 4  1  7  5  12  6
+
+pmin(x, y) #----> 2  1  7  5 10  6 
+
+pmax(x, y) #----> 4  9  7  6 12 14
+```
+##################################################
+
+######################
+# THE ifelse() FUNCTION
+######################
+
+### ifelse() is a simplified version of the if-else conditional statement
+### it is applied to vectors
+
+### the function syntax:
+
+## ifelse(condition, action if true, action if false) ##
+
+### condition - condition to be checked (tested)
+
+### action if true - the action that the program must do if the condition is met
+
+### action if false - the action that the program must do if the condition is NOT met
+
+### the condition generates a logical vector
+### that takes the value TRUE if the condition is satisfied
+### and the value FALSE otherwise
+
+### we will build an ifelse() function that checks whether the elements
+### in a vector are even numbers
+### if so, they will be DIVIDED by TWO, if ELSE they will be copied
+```{r}
+x <- c(6, 10, 9, 5, 20, 7, 16)
+
+y <- ifelse(x%%2 == 0, x/2, x)
+
+y #----> 3  5  9  5 10  7  8
+```
+### create an ifelse() function that multiplies the component by 5
+### if it is lower than or equal to 12 and by 3 if it is greater than 12
+
+```{r}
+x <- c(2, 6, 15, 10, 20, 14)
+
+y <-ifelse(x<=12, x * 5, x * 3) #-->ifelse(condition=TRUE, DO action1, otherwise DO action2)
+
+y #---> 10 30 45 50 60 42
+```
+
+### Create another ifelse() function that does the following:
+### if the component is greater than or equal to zero, it extracts the square root
+### otherwise, it changes the component sign and then extracts the square root
+
+```{r}
+x <- c(25, -36, 100, 0, -1, 49, 4, -68)
+
+y <- ifelse(x>=0, sqrt(x), sqrt(-x))
+
+y #---> 5.000000  6.000000 10.000000  0.000000  1.000000  7.000000  2.000000  8.246211
+
+# Warning messages---> Because the program computed the SQRT of negative numbers
+# Before changing the SIGNS
+"1: In sqrt(x) : NaNs produced
+ 2: In sqrt(-x) : NaNs produced"
+### TO REMOVE WARNINGS, we can do as follows
+
+y <- sqrt(ifelse(x>=0, x, -x)) #--> introduce the ifelse function within the sqrt function
+### IF the COMPONENT is GREATER than or EQUAL to zero, the COMPONENT is COPIED
+### IF it is LOWER than zero, the SIGN is CHANGED
+
+y #---> SAME AS LINE #? above
+```
+
+### one last example: an ifelse() function that returns 1
+### if the square of the component is greater than 100 and 0 otherwise
+```{r}
+x <- c(15, 6, 10, 30, 4)
+
+y <- ifelse(x^2>100, 1, 0) #--> if the Square of the COMPONENT is greater than 100,
+                           #--> the function returns 1, IF ELSE it returns 0
+#Lets see
+y #-----> 1 0 0 1 0
+
+```
+#######################################################
+
+
+
+
+
+###########################
+# ADDING AND MULTIPLYING VECTORS
+###########################
+
+### the vectors of the same length can be added and multiplied element-wise
+
+```{r}
+x <- c(2, 4, 6, 8)
+
+y <- c(10, 20, 30, 40)
+```
+
+```{r}
+z <- x + y
+
+z
+```
+
+```{r}
+x - y #---> -8 -16 -24 -32
+
+x * y #---> 20  80 180 320
+
+x / y #---> 0.2 0.2 0.2 0.2
+
+y / x #---> 5 5 5 5
+```
+
+# Compute the MODULO 
+# Remainder of dividing each component of x by each component of y
+```{r}
+
+x %% y #----> 2 4 6 8
+
+y %% x #---> 0 0 0 0
+
+```
+
+### if the vectors have different lengths
+### the shorter vector is RECYCLED
+
+```{r}
+x <- c(1, 2, 3, 4)
+
+y <- c(9, 10)
+
+x + y #---> 10 12 12 14
+
+### y was recycled to (9, 10, 9, 10)
+
+#compute multiplication
+x * y #----> 9 20 27 40
+
+#compute MODULO
+y %% x #---> 0 0 0 2
+```
+##################################################
+
+#######################
+# TESTING VECTOR EQUALITY
+#######################
+
+### the comparisons between vectors are vectorized operations
+### the comparison is done element-wise
+
+```{r}
+x <- c(7, 10, 3, 9, 6)
+
+y <- c(2, 14, 5, 15, 6)
+```
+### the operation below returns TRUE for the pairs of components
+### where x is greater than y and FALSE for the pairs of components
+### wherey y is greater than x
+```{r}
+x > y #----> TRUE FALSE FALSE FALSE FALSE
+
+```
+
+### the operation below returns TRUE for the pairs of components
+### where y is greater than x and FALSE for the pairs of components
+### wherey x is greater than y
+
+```{r}
+y > x #----> FALSE  TRUE  TRUE  TRUE FALSE
+
+### the operation below returns TRUE for the pairs of components
+### where x is equal to y
+
+y == x #----> FALSE FALSE FALSE FALSE  TRUE
+```
+
+### To check whether two vectors are equal
+### (all the components are the same)
+```{r}
+x <- c(2, 4, 6)
+
+y <- c(2, 4, 6)
+
+all(y == x) #----> FALSE
+```
+### the function all() can be used for other comparisons too
+
+```{r}
+x <- c(7, 8, 9)
+
+y <- c(2, 4, 6)
+```
+
+### check whether all components in x are greater than 
+### their corresponding components in y
+
+```{r}
+all(x>y) #----> TRUE
+
+# conversely
+
+all(y>x) #-----> FALSE
+```
+
+### the function any() can also be used for comparisons
+
+```{r}
+x <- c(4, 5, 6, 8)
+
+y <- c(2, 7, 10, 8)
+```
+
+### check whether at least one component in x is greater than 
+### its corresponding component in y
+```{r}
+any(x>y) #----> TRUE
+
+# conversely
+
+any(y>x) #----> TRUE
+
+# check whether at least one component in x is equal to 
+# its corresponding component in y
+
+any(x==y) #---> TRUE
+```
+### another function that allows us to test vector equality
+### is identical()
+
+```{r}
+x <- c(1, 2, 3)
+
+y <- c(1, 2, 3)
+
+z <- c(1, 2, 5)
+
+identical(x, y) #----> TRUE
+
+identical(x, z) #----> FALSE
+```
+### another function is all.equal()
+### if the vectors are identical, it returns TRUE
+### if not, it returns the MEAN DIFFERENCE BETWEEN COMPONENTS
+```{r}
+all.equal(x, y) #----> TRUE
+
+all.equal(x, z)  # mean difference is 0.6667: (5-3)/3
+```
+
+### EQUAL is NOT Necessarily IDENTICAL
+```{r}
+x <- c(4, 5, 6) 
+
+y <- 4:6
+
+identical(x, y) #----> FALSE
+typeof(x) #--> "double"
+typeof(y) #--> "integer
+### these vectors are not identical, because they are of different types
+typeof(x)
+typeof(y)
+
+### however, the all.equal() function returns TRUE
+
+all.equal(x, y) #----> TRUE
+
+### that's because all.equal() evaluates the "near identity"
+### it is interested only in the components values
+### and not in the vectors type
+```
+#######################################################
+##################
+# VECTOR CORRELATION
+##################
+
+### we can use the Pearson correlation coefficient
+### to assess the correlation between two numeric vectors
+
+### the vectors must have the same length
+
+### the vector of the employees' annual salaries (in thousands)
+
+```{r}
+sal <- c(80, 66, 42, 40, 75, 82, 54, 44, 85, 83)
+```
+### the vector of the employees' education (in years of school completed)
+```{r}
+edu <- c(15, 18, 12, 12, 16, 17, 13, 12, 17, 16)
+```
+### to compute the correlation we use the cor.test() function
+
+```{r}
+cor.test(sal, edu) #----> 0.858553 
+```
+### Pearson's product-moment correlation
+
+### data:  sal and edu
+### t = 4.7362, df = 8, p-value = 0.001471
+### alternative hypothesis: true correlation is not equal to 0
+### 95 percent confidence interval:
+### 0.4982815 0.9659942
+### sample estimates:
+###   cor
+### 0.858553') 
+
+#########################################################
+
+
+
+
